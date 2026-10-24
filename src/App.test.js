@@ -1,37 +1,25 @@
-* {
-  box-sizing: border-box;
-}
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f2f4f7;
-}
+import "@testing-library/jest-dom";
+import { render, screen, fireEvent } from "@testing-library/react";
+import App from "./App";
 
-.container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+test("Initial status is OFF", () => {
+  render(<App />);
+  expect(screen.getByText("Status: OFF")).toBeInTheDocument();
+});
 
-.card {
-  background: white;
-  padding: 40px;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-}
+test("Toggle changes OFF to ON", () => {
+  render(<App />);
+  fireEvent.click(screen.getByRole("button", { name: /toggle/i }));
+  expect(screen.getByText("Status: ON")).toBeInTheDocument();
+});
 
-h1 {
-  margin-bottom: 30px;
-}
+test("Toggle changes ON back to OFF", () => {
+  render(<App />);
+  const button = screen.getByRole("button", { name: /toggle/i });
 
-button {
-  padding: 12px 25px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-}
+  fireEvent.click(button);
+  fireEvent.click(button);
+
+  expect(screen.getByText("Status: OFF")).toBeInTheDocument();
+});
