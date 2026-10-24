@@ -2,7 +2,6 @@
 import React from "react";
 import useToggle from "./useToggle";
 import "./index.css";
-
 function App() {
   const [isOn, toggle] = useToggle(false);
 
