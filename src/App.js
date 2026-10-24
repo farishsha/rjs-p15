@@ -3,11 +3,7 @@ import useToggle from "./useToggle";
 
 function App() {
 
-  // TODO:
-  // Use the custom useToggle Hook here
-  // Example:
-  // const [isOn, toggle] = useToggle(false);
-
+  const [isOn, toggle] = useToggle(false);
 
   return (
     <div className="container">
@@ -18,12 +14,12 @@ function App() {
 
         <h2>
           Status:
-          {/* TODO: Display ON when value is true
-              and OFF when value is false */}
+          <span data-testid="status">
+            {isOn ? " ON" : " OFF"}
+          </span>
         </h2>
 
-        <button>
-          {/* TODO: Call the toggle function when clicked */}
+        <button onClick={toggle}>
           Toggle
         </button>
 
